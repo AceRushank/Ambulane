@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ambulance Hospital Finder</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #f5f5f5;
+      }
+      
+      * {
+        box-sizing: border-box;
+      }
+      
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      
+      header {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 8px;
+        color: #1976d2;
+      }
+      
+      p {
+        font-size: 1.2rem;
+        color: #666;
+      }
+      
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      
+      .sidebar {
+        flex: 1;
+        min-width: 300px;
+      }
+      
+      .map-container {
+        flex: 2;
+        min-width: 400px;
+      }
+      
+      .card {
+        background-color: white;
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 24px;
+      }
+      
+      .card h2 {
+        margin-top: 0;
+        font-size: 1.5rem;
+        color: #1976d2;
+      }
+      
+      .input-group {
+        margin-bottom: 16px;
+      }
+      
+      .input-field {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+      
+      .button {
+        background-color: #1976d2;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 8px;
+      }
+      
+      .button:hover {
+        background-color: #1565c0;
+      }
+      
+      .hospital-list {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+      
+      .hospital-item {
+        padding: 16px;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .hospital-name {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+      
+      .hospital-address {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+      }
+      
+      .hospital-distance {
+        color: #4caf50;
+        font-weight: bold;
+      }
+      
+      .button-group {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      
+      .button-small {
+        flex: 1;
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+      
+      .map-placeholder {
+        background-color: #e5e5e5;
+        height: 400px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #666;
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Ambulance Hospital Finder</h1>
+        <p>Quickly find and navigate to nearby hospitals</p>
+      </header>
+      
+      <div class="grid">
+        <div class="sidebar">
+          <div class="card">
+            <h2>Ambulance Driver Dashboard</h2>
+            <p>Find nearby hospitals and navigate to them.</p>
+            
+            <div class="input-group">
+              <input type="text" class="input-field" placeholder="Enter your location" value="Sion, Mumbai, Maharashtra, India">
+            </div>
+            
+            <button class="button">Find Hospitals</button>
+            
+            <div class="input-group" style="margin-top: 16px;">
+              <label>Search Radius: 5 km</label>
+              <input type="range" min="1" max="10" value="5" style="width: 100%;">
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="hospital-list">
+              <div class="hospital-item">
+                <div class="hospital-name">Lokmanya Tilak Municipal General Hospital</div>
+                <div class="hospital-address">Sion West, Mumbai, Maharashtra 400022</div>
+                <div class="hospital-distance">1.2 km</div>
+                <div class="button-group">
+                  <button class="button button-small">Select</button>
+                  <button class="button button-small" style="background-color: transparent; color: #1976d2; border: 1px solid #1976d2;">Directions</button>
+                </div>
+              </div>
+              
+              <div class="hospital-item">
+                <div class="hospital-name">Dr. B. A. Memorial Hospital</div>
+                <div class="hospital-address">Sion East, Mumbai, Maharashtra 400022</div>
+                <div class="hospital-distance">1.8 km</div>
+                <div class="button-group">
+                  <button class="button button-small">Select</button>
+                  <button class="button button-small" style="background-color: transparent; color: #1976d2; border: 1px solid #1976d2;">Directions</button>
+                </div>
+              </div>
+              
+              <div class="hospital-item">
+                <div class="hospital-name">Hinduja Hospital</div>
+                <div class="hospital-address">Mahim, Mumbai, Maharashtra 400016</div>
+                <div class="hospital-distance">3.5 km</div>
+                <div class="button-group">
+                  <button class="button button-small">Select</button>
+                  <button class="button button-small" style="background-color: transparent; color: #1976d2; border: 1px solid #1976d2;">Directions</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="map-container">
+          <div class="map-placeholder">
+            Google Maps will be displayed here with real hospital locations.
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html> 
